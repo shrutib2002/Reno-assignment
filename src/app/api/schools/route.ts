@@ -6,10 +6,10 @@ import mysql from 'mysql2/promise';
 
 // Configure MySQL connection
 const dbConfig = {
-  host: 'localhost',
-  user: 'root',
-  password: '', // Replace with your MySQL password
-  database: 'school_db', // Replace with your database name
+  host: process.env.DB_HOST ,
+  user: process.env.DB_USER ,
+  password: process.env.DB_PASSWORD ,
+  database: process.env.DB_DATABASE,
 };
 
 const uploadDir = path.join(process.cwd(), 'public/schoolImages');
