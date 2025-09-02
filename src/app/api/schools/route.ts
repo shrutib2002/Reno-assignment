@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: 'School added successfully!', schoolId: result.insertId }, { status: 201 });
   } catch (error) {
     console.error('Error adding school:', error);
-    return NextResponse.json({ message: 'Failed to add school.', error: (error as Error).message }, { status: 500 });
+    return NextResponse.json({ message: 'Failed to add school.', error: error instanceof Error ? error.message : 'Unknown error' }, { status: 500 });
   }
 }
 
@@ -64,6 +64,6 @@ export async function GET() {
     return NextResponse.json(rows);
   } catch (error) {
     console.error('Error fetching schools:', error);
-    return NextResponse.json({ message: 'Failed to fetch schools.', error: (error as Error).message }, { status: 500 });
+    return NextResponse.json({ message: 'Failed to fetch schools.', error: error instanceof Error ? error.message : 'Unknown error' }, { status: 500 });
   }
 }
