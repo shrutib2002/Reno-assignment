@@ -56,8 +56,12 @@ const AddSchoolPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-purple-800 via-indigo-900 to-purple-950 flex flex-col items-center justify-center p-4">
+      <div className="absolute inset-0 z-0 opacity-20">
+        {/* Subtle pattern or texture */}
+        <div className="absolute inset-0 bg-repeat bg-center" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239d174f" fill-opacity="0.1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 0v4h2v-4h4v-2h-4v-4h-2v4zM12 14v-4H10v4H6v2h4v4h2v-4h4v-2h-4zm0 0v4H14v-4h4v-2h-4v-4h-2v4z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
+      </div>
+      <div className="relative z-10 bg-white p-8 rounded-lg shadow-md w-full max-w-lg">
         <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">Add New School</h1>
 
         {message && (
@@ -73,7 +77,7 @@ const AddSchoolPage = () => {
               type="text"
               id="name"
               {...register('name', { required: 'School name is required' })}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
             />
             {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>}
           </div>
@@ -84,7 +88,7 @@ const AddSchoolPage = () => {
               type="text"
               id="address"
               {...register('address', { required: 'Address is required' })}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
             />
             {errors.address && <p className="text-red-500 text-xs mt-1">{errors.address.message}</p>}
           </div>
@@ -96,7 +100,7 @@ const AddSchoolPage = () => {
                 type="text"
                 id="city"
                 {...register('city', { required: 'City is required' })}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
               />
               {errors.city && <p className="text-red-500 text-xs mt-1">{errors.city.message}</p>}
             </div>
@@ -107,7 +111,7 @@ const AddSchoolPage = () => {
                 type="text"
                 id="state"
                 {...register('state', { required: 'State is required' })}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
               />
               {errors.state && <p className="text-red-500 text-xs mt-1">{errors.state.message}</p>}
             </div>
@@ -125,7 +129,7 @@ const AddSchoolPage = () => {
                   message: 'Invalid contact number (10-15 digits)',
                 },
               })}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
             />
             {errors.contact && <p className="text-red-500 text-xs mt-1">{errors.contact.message}</p>}
           </div>
@@ -142,7 +146,7 @@ const AddSchoolPage = () => {
                   message: 'Invalid email address',
                 },
               })}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
             />
             {errors.email_id && <p className="text-red-500 text-xs mt-1">{errors.email_id.message}</p>}
           </div>
@@ -158,8 +162,8 @@ const AddSchoolPage = () => {
                 file:mr-4 file:py-2 file:px-4
                 file:rounded-md file:border-0
                 file:text-sm file:font-semibold
-                file:bg-blue-50 file:text-blue-700
-                hover:file:bg-blue-100"
+                file:bg-purple-50 file:text-purple-700
+                hover:file:bg-purple-100"
             />
             {errors.image && <p className="text-red-500 text-xs mt-1">{errors.image.message}</p>}
           </div>
@@ -167,7 +171,7 @@ const AddSchoolPage = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
           >
             {isLoading ? 'Adding School...' : 'Add School'}
           </button>
