@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 // import formidable from 'formidable'; // Removed formidable import
-import mysql from 'mysql2/promise';
+import mysql, { ResultSetHeader } from 'mysql2/promise';
 
 // Configure MySQL connection
 const dbConfig = {
@@ -46,10 +46,10 @@ export async function POST(req: NextRequest) {
     const [result] = await connection.execute(
       'INSERT INTO schools (name, address, city, state, contact, image, email_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
       [name, address, city, state, contact, imageUrl, email_id]
-    );
+    ) as [ResultSetHeader, any];
     await connection.end();
 
-    return NextResponse.json({ message: 'School added successfully!', schoolId: (result as any).insertId }, { status: 201 });
+    return NextResponse.json({ message: 'School added successfully!', schoolId: result.insertId }, { status: 201 });
   } catch (error) {
     console.error('Error adding school:', error);
     return NextResponse.json({ message: 'Failed to add school.', error: (error as Error).message }, { status: 500 });
