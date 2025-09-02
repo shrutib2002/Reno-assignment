@@ -4,6 +4,22 @@ import path from 'path';
 // import formidable from 'formidable'; // Removed formidable import
 import mysql, { ResultSetHeader } from 'mysql2/promise';
 
+interface ErrorResponse {
+  message: string;
+  error: string;
+}
+
+// Helper function to safely get error message as string
+const getErrorMessage = (error: unknown): string => {
+  if (error instanceof Error) {
+    return error.message;
+  }
+  if (typeof error === 'string') {
+    return error;
+  }
+  return 'An unexpected error occurred.';
+};
+
 // Configure MySQL connection
 const dbConfig = {
   host: process.env.DB_HOST ,
@@ -50,9 +66,9 @@ export async function POST(req: NextRequest) {
     await connection.end();
 
     return NextResponse.json({ message: 'School added successfully!', schoolId: result.insertId }, { status: 201 });
-  } catch (error) {
-    console.error('Error adding school:', error);
-    return NextResponse.json({ message: 'Failed to add school.', error: error instanceof Error ? error.message : 'Unknown error' }, { status: 500 });
+  } catch (error: unknown) {
+    console.error('Error adding school:', String(error));
+    return NextResponse.json({ message: 'Failed to add school.', error: getErrorMessage(error) } as ErrorResponse, { status: 500 });
   }
 }
 
@@ -62,8 +78,8 @@ export async function GET() {
     const [rows] = await connection.execute('SELECT id, name, address, city, image FROM schools');
     await connection.end();
     return NextResponse.json(rows);
-  } catch (error) {
-    console.error('Error fetching schools:', error);
-    return NextResponse.json({ message: 'Failed to fetch schools.', error: error instanceof Error ? error.message : 'Unknown error' }, { status: 500 });
+  } catch (error: unknown) {
+    console.error('Error fetching schools:', String(error));
+    return NextResponse.json({ message: 'Failed to fetch schools.', error: getErrorMessage(error) } as ErrorResponse, { status: 500 });
   }
 }
